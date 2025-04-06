@@ -1,0 +1,42 @@
+﻿@model Domain.Poll
+@{
+    ViewData["Title"] = "Results";
+}
+
+<h2>Results for "@Model.Title"</h2>
+
+<canvas id="resultChart" width="400" height="300"></canvas>
+
+<!-- Include Chart.js via CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+<script>
+    // Prepare data for chart
+    const ctx = document.getElementById('resultChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['@Model.Option1', '@Model.Option2', '@Model.Option3'],
+            datasets: [{
+                label: 'Votes',
+                data: [@Model.Votes1, @Model.Votes2, @Model.Votes3],
+                backgroundColor: ['#4e79a7', '#59a14f', '#e15759']
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 } }
+            }
+        }
+    });
+</script>
+
+<!-- Textual results as well -->
+<ul class="mt-3">
+    <li><strong>@Model.Option1:</strong> @Model.Votes1 votes</li>
+    <li><strong>@Model.Option2:</strong> @Model.Votes2 votes</li>
+    <li><strong>@Model.Option3:</strong> @Model.Votes3 votes</li>
+</ul>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Back to Polls</a>
+</p>

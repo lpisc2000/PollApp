@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Domain.Poll>
+@{
+    ViewData["Title"] = "All Polls";
+}
+
+<h2>All Polls</h2>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">+ Create New Poll</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var poll in Model)
+        {
+            <tr>
+                <td>@poll.Title</td>
+                <td>@poll.Date.ToString("g")</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" asp-action="Vote" asp-route-id="@poll.Id">Vote</a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@poll.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

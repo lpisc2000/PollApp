@@ -1,0 +1,26 @@
+﻿@model Domain.Poll
+@{
+    ViewData["Title"] = "Vote";
+}
+
+<h2>@Model.Title</h2>
+<p>Please choose one of the options:</p>
+
+<form asp-action="Vote" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="selectedOption" id="opt1" value="1" required>
+        <label class="form-check-label" for="opt1">@Model.Option1</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="selectedOption" id="opt2" value="2" required>
+        <label class="form-check-label" for="opt2">@Model.Option2</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="selectedOption" id="opt3" value="3" required>
+        <label class="form-check-label" for="opt3">@Model.Option3</label>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Submit Vote</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back to Polls</a>
+</form>
